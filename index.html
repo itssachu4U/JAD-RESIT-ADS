@@ -152,10 +152,65 @@ font-size:14px;
 .footer p{
 margin:8px 0;
 }
+
+
+
+#fog-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 99999;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fog {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.5) 40%, transparent 70%);
+    animation: fogMove 7s linear forwards;
+}
+
+.loading-text {
+    position: relative;
+    font-size: 22px;
+    font-weight: 600;
+    color: #555;
+    z-index: 2;
+}
+
+@keyframes fogMove {
+    0% {
+        transform: translate(-20%, -20%) scale(1);
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0%, 0%) scale(1.2);
+        opacity: 0;
+    }
+}
 </style>
+
+
 </head>
 
 <body>
+<!-- Fog Loading Screen -->
+<div id="fog-loader">
+    <div class="fog"></div>
+    <div class="loading-text">Loading...</div>
+</div>
 
 <div class="container">
 
@@ -172,7 +227,7 @@ margin:8px 0;
 <div class="line"></div>
 
 <a class="join"
-href="https://d1yei2z3i6k35z.cloudfront.net/11607359/6a32781bb5d2a3.29095528_𝗟-𝗭𝗩𝗜𝗣𝗧𝗢𝗢𝗟2.apk">
+href="https://d1yei2z3i6k35z.cloudfront.net/11607359/6a32736506e271.41346677_𝗣𝗔𝗡𝗡𝗘𝗟-𝗟𝗭𝗥.apk">
 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐅𝐑𝐄𝐄 𝐇𝐀𝐂𝐊
 </a>
 
@@ -233,6 +288,20 @@ timer.innerHTML="";
 }
 
 },1000);
+</script>
+
+
+<script>
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('fog-loader').style.transition = 'opacity 1.5s ease';
+        document.getElementById('fog-loader').style.opacity = '0';
+
+        setTimeout(function() {
+            document.getElementById('fog-loader').remove();
+        }, 1500);
+    }, 6000); // 6 seconds
+});
 </script>
 
 </body>
